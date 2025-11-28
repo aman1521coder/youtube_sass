@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import LandingPage from "@/components/LandingPage";
 import Sidebar from "@/components/Sidebar";
 import Dashboard from "@/components/Dashboard";
 import CampaignManager from "@/components/CampaignManager";
@@ -13,8 +14,15 @@ import BrandIntegration from "@/components/BrandIntegration";
 import VideoLibrary from "@/components/VideoLibrary";
 
 export default function Home() {
+  const [showApp, setShowApp] = useState(false);
   const [currentView, setCurrentView] = useState("dashboard");
 
+  // Show landing page first
+  if (!showApp) {
+    return <LandingPage onGetStarted={() => setShowApp(true)} />;
+  }
+
+  // Show main app after landing page
   const renderView = () => {
     switch (currentView) {
       case "dashboard":
